@@ -1,6 +1,7 @@
 package com.ridelink.account;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.time.Instant;
 
@@ -35,6 +36,20 @@ class AccountSecurityTests {
 
         assertThat(tokenService.extractUsername(token)).isEqualTo(account.getEmail());
         assertThat(tokenService.isTokenValid(token, principal)).isTrue();
+    }
+
+    @Test
+    void constructorRejectsShortSigningSecrets() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new JwtTokenService("short-secret", 900_000))
+                .withMessage("security.jwt.secret must contain at least 32 UTF-8 bytes");
+    }
+
+    @Test
+    void constructorRejectsNonPositiveExpiration() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new JwtTokenService(JWT_SECRET, 0))
+                .withMessage("security.jwt.expiration-ms must be greater than zero");
     }
 
     private Account createAccount(AccountStatus status) {

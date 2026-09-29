@@ -24,6 +24,12 @@ public class JwtTokenService {
     public JwtTokenService(
             @Value("${security.jwt.secret}") String secret,
             @Value("${security.jwt.expiration-ms}") long expirationMs) {
+        if (secret == null || secret.getBytes(StandardCharsets.UTF_8).length < 32) {
+            throw new IllegalArgumentException("security.jwt.secret must contain at least 32 UTF-8 bytes");
+        }
+        if (expirationMs <= 0) {
+            throw new IllegalArgumentException("security.jwt.expiration-ms must be greater than zero");
+        }
         this.signingKey = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
         this.expirationMs = expirationMs;
     }
