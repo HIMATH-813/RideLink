@@ -1,6 +1,6 @@
 name: RideLink Microservices CI
 
-# මේ pipeline එක වැඩ කරන්නේ main සහ develop branches වලට push හෝ PR එකක් ආවමයි
+# main සහ develop branches වලට push හෝ PR එකක් ආවම ක්‍රියාත්මක වේ
 on:
   push:
     branches: [ "main", "develop" ]
@@ -12,9 +12,9 @@ jobs:
     name: Build & Test
     runs-on: ubuntu-latest
 
-    # Services 4 වෙන වෙනම parallel run කරන්න matrix එකක් පාවිච්චි කරනවා
+    # Services 4 වෙන වෙනම parallel run කිරීමට matrix එකක් පාවිච්චි කරයි
     strategy:
-      fail-fast: false # එක service එකක් fail වුණත් අනිත් ඒවා දිගටම run වෙන්න දෙනවා
+      fail-fast: false # එක service එකක් fail වුණත් අනිත් ඒවා දිගටම run වේ
       matrix:
         include:
           - service: account-service
@@ -37,10 +37,14 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
+      - name: Make Maven Wrapper Executable
+        working-directory: ./${{ matrix.service }}
+        run: chmod +x ./mvnw
+
       - name: Build and Test ${{ matrix.service }}
         working-directory: ./${{ matrix.service }}
         env:
-          MONGO_URI: ${{ secrets[matrix.db_secret] }}
+          MONGO_DB_URI: ${{ secrets[matrix.db_secret] }}
           JWT_SECRET: "my-super-secret-key-that-is-at-least-32-bytes-long"
           JWT_EXPIRATION_MS: 900000
-        run: mvn clean test -Dsecurity.jwt.secret=my-super-secret-key-that-is-at-least-32-bytes-long -Dsecurity.jwt.expiration-ms=900000
+        run: ./mvnw clean test -Dsecurity.jwt.secret=my-super-secret-key-that-is-at-least-32-bytes-long -Dsecurity.jwt.expiration-ms=900000
