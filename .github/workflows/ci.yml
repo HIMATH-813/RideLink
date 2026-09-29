@@ -16,11 +16,15 @@ jobs:
     strategy:
       fail-fast: false # එක service එකක් fail වුණත් අනිත් ඒවා දිගටම run වෙන්න දෙනවා
       matrix:
-        service:
-          - account-service
-          - driver-service
-          - ride-service
-          - fare-service
+        include:
+          - service: account-service
+            db_secret: ACCOUNT_MONGO_URI
+          - service: driver-service
+            db_secret: DRIVER_MONGO_URI
+          - service: ride-service
+            db_secret: RIDE_MONGO_URI
+          - service: fare-service
+            db_secret: FARE_MONGO_URI
 
     steps:
       - name: Checkout Source Code
@@ -36,5 +40,7 @@ jobs:
       - name: Build and Test ${{ matrix.service }}
         working-directory: ./${{ matrix.service }}
         env:
-          MONGO_URI: ${{ secrets.MONGO_URI }}
+          MONGO_URI: ${{ secrets[matrix.db_secret] }}
+          JWT_SECRET: "my-super-secret-key-that-is-at-least-32-bytes-long"
+          JWT_EXPIRATION_MS: 900000
         run: mvn clean test
