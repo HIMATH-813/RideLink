@@ -37,6 +37,10 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
+      - name: Make Maven Wrapper Executable
+        working-directory: ./${{ matrix.service }}
+        run: chmod +x ./mvnw
+
       - name: Build and Test ${{ matrix.service }}
         working-directory: ./${{ matrix.service }}
         env:
