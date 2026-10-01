@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.ridelink.ride_service.model.RideStatus;
 
-@SpringBootTest
+@SpringBootTest(properties = "spring.mongodb.uri=mongodb://localhost/test")
 class RideServiceApplicationTests {
 
 	@Test
@@ -18,10 +18,10 @@ class RideServiceApplicationTests {
 	@Test
 	void allowsOnlyTheNextLifecycleState() {
 		assertTrue(RideStatus.REQUESTED.isValidNextState(RideStatus.ASSIGNED));
+		assertTrue(RideStatus.REQUESTED.isValidNextState(RideStatus.ACCEPTED));
 		assertTrue(RideStatus.ASSIGNED.isValidNextState(RideStatus.ACCEPTED));
 		assertTrue(RideStatus.ACCEPTED.isValidNextState(RideStatus.IN_PROGRESS));
 		assertTrue(RideStatus.IN_PROGRESS.isValidNextState(RideStatus.COMPLETED));
-		assertFalse(RideStatus.REQUESTED.isValidNextState(RideStatus.ACCEPTED));
 		assertFalse(RideStatus.IN_PROGRESS.isValidNextState(RideStatus.ASSIGNED));
 	}
 
@@ -31,8 +31,10 @@ class RideServiceApplicationTests {
 		assertTrue(RideStatus.ASSIGNED.isValidNextState(RideStatus.CANCELLED));
 		assertTrue(RideStatus.ACCEPTED.isValidNextState(RideStatus.CANCELLED));
 		assertTrue(RideStatus.IN_PROGRESS.isValidNextState(RideStatus.CANCELLED));
-		assertFalse(RideStatus.COMPLETED.isValidNextState(RideStatus.CANCELLED));
-		assertFalse(RideStatus.CANCELLED.isValidNextState(RideStatus.CANCELLED));
+		for (RideStatus nextState : RideStatus.values()) {
+			assertFalse(RideStatus.COMPLETED.isValidNextState(nextState));
+			assertFalse(RideStatus.CANCELLED.isValidNextState(nextState));
+		}
 		assertFalse(RideStatus.REQUESTED.isValidNextState(null));
 	}
 

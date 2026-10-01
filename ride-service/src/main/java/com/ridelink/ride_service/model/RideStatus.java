@@ -14,7 +14,7 @@ public enum RideStatus {
         }
 
         return switch (this) {
-            case REQUESTED -> nextState == ASSIGNED || nextState == CANCELLED;
+            case REQUESTED -> nextState == ASSIGNED || nextState == ACCEPTED || nextState == CANCELLED;
             case ASSIGNED -> nextState == ACCEPTED || nextState == CANCELLED;
             case ACCEPTED -> nextState == IN_PROGRESS || nextState == CANCELLED;
             case IN_PROGRESS -> nextState == COMPLETED || nextState == CANCELLED;
