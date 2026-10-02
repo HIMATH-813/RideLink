@@ -9,6 +9,15 @@
       "projectName": "ride-service",
       "cwd": "${workspaceFolder}/ride-service",
       "envFile": "${workspaceFolder}/.env"
+    },
+    {
+       "type": "java",
+      "name": "Driver Service",
+      "request": "launch",
+      "mainClass": "com.ridelink.driverservice.DriverServiceApplication",
+      "projectName": "driver-service",
+      "cwd": "${workspaceFolder}/driver-service",
+      "envFile": "${workspaceFolder}/.env"
     }
   ]
 }
