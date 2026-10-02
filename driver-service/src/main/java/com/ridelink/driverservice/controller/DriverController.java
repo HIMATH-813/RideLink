@@ -1,18 +1,9 @@
-package com.ridelink.driver_service.controller;
+package com.ridelink.driverservice.controller;
 
-import com.ridelink.driver_service.dto.DriverRequestDTO;
-import com.ridelink.driver_service.dto.DriverResponseDTO;
-import com.ridelink.driver_service.model.AvailabilityStatus;
-import com.ridelink.driver_service.model.Location;
-import com.ridelink.driver_service.service.DriverService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +14,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.ridelink.driverservice.dto.DriverRequestDTO;
+import com.ridelink.driverservice.dto.DriverResponseDTO;
+import com.ridelink.driverservice.model.AvailabilityStatus;
+import com.ridelink.driverservice.model.Location;
+import com.ridelink.driverservice.service.DriverService;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/drivers")

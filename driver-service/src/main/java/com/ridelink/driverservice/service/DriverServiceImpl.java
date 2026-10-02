@@ -1,18 +1,21 @@
-package com.ridelink.driver_service.service;
+package com.ridelink.driverservice.service;
 
-import com.ridelink.driver_service.dto.DriverRequestDTO;
-import com.ridelink.driver_service.dto.DriverResponseDTO;
-import com.ridelink.driver_service.model.AvailabilityStatus;
-import com.ridelink.driver_service.model.Driver;
-import com.ridelink.driver_service.model.Location;
-import com.ridelink.driver_service.repository.DriverRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import com.ridelink.driverservice.dto.DriverRequestDTO;
+import com.ridelink.driverservice.dto.DriverResponseDTO;
+import com.ridelink.driverservice.model.AvailabilityStatus;
+import com.ridelink.driverservice.model.Driver;
+import com.ridelink.driverservice.model.Location;
+import com.ridelink.driverservice.repository.DriverRepository;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor

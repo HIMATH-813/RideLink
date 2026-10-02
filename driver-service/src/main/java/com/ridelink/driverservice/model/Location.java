@@ -1,4 +1,4 @@
-package com.ridelink.driver_service.model;
+package com.ridelink.driverservice.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.DecimalMax;
