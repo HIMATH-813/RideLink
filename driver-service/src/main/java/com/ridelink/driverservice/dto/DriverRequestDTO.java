@@ -1,8 +1,8 @@
-package com.ridelink.driver_service.dto;
+package com.ridelink.driverservice.dto;
 
-import com.ridelink.driver_service.model.AvailabilityStatus;
-import com.ridelink.driver_service.model.Location;
-import com.ridelink.driver_service.model.VehicleDetails;
+import com.ridelink.driverservice.model.AvailabilityStatus;
+import com.ridelink.driverservice.model.Location;
+import com.ridelink.driverservice.model.VehicleDetails;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;

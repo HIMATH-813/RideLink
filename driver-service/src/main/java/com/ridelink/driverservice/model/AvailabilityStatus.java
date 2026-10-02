@@ -1,4 +1,4 @@
-package com.ridelink.driver_service.model;
+package com.ridelink.driverservice.model;
 
 public enum AvailabilityStatus {
     AVAILABLE,

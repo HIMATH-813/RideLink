@@ -1,10 +1,11 @@
-package com.ridelink.driver_service.service;
+package com.ridelink.driverservice.service;
 
-import com.ridelink.driver_service.dto.DriverRequestDTO;
-import com.ridelink.driver_service.dto.DriverResponseDTO;
-import com.ridelink.driver_service.model.AvailabilityStatus;
-import com.ridelink.driver_service.model.Location;
 import java.util.List;
+
+import com.ridelink.driverservice.dto.DriverRequestDTO;
+import com.ridelink.driverservice.dto.DriverResponseDTO;
+import com.ridelink.driverservice.model.AvailabilityStatus;
+import com.ridelink.driverservice.model.Location;
 
 public interface DriverService {
     DriverResponseDTO createOrUpdateDriver(DriverRequestDTO request);
