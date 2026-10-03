@@ -1,14 +1,15 @@
 package com.ridelink.ride_service.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import feign.FeignException;
 import org.springframework.stereotype.Service;
 
 import com.ridelink.ride_service.client.DriverServiceClient;
+import com.ridelink.ride_service.dto.ApiResponse;
 import com.ridelink.ride_service.dto.CreateRideRequest;
 import com.ridelink.ride_service.dto.DriverResponse;
-import com.ridelink.ride_service.dto.DriverStatusUpdateRequest;
 import com.ridelink.ride_service.exception.InvalidStateTransitionException;
 import com.ridelink.ride_service.exception.NoAvailableDriverException;
 import com.ridelink.ride_service.exception.RideNotFoundException;
@@ -45,25 +46,36 @@ public class RideServiceImpl implements RideService {
     @Override
     public Ride assignDriver(String rideId) {
         Ride ride = getRideById(rideId);
+
+        // Ensure the ride is in REQUESTED state before assigning
         if (ride.getStatus() != RideStatus.REQUESTED) {
             throw new InvalidStateTransitionException(ride.getStatus(), RideStatus.ASSIGNED);
         }
 
-        DriverResponse driver;
+        ApiResponse<List<DriverResponse>> apiResponse;
         try {
-            driver = driverServiceClient.findAvailableDriver(ride.getPickupLocation());
+            // Fetch eligible drivers from Driver Service based on the pickup location
+            apiResponse = driverServiceClient.getEligibleDrivers(ride.getPickupLocation());
         } catch (FeignException.NotFound exception) {
             throw new NoAvailableDriverException(ride.getPickupLocation());
         }
-        if (driver == null || driver.id() == null || !driver.available()) {
+
+        // Check if the response is valid and contains available drivers
+        if (apiResponse == null || !apiResponse.success() || apiResponse.data() == null || apiResponse.data().isEmpty()) {
             throw new NoAvailableDriverException(ride.getPickupLocation());
         }
 
-        driverServiceClient.updateDriverStatus(
-                driver.id(), new DriverStatusUpdateRequest(DRIVER_BUSY));
-        ride.setDriverId(driver.id());
+        // Select the first eligible driver from the list
+        DriverResponse driver = apiResponse.data().get(0);
+
+        // Update the selected driver's availability status to BUSY
+        driverServiceClient.updateAvailability(driver.driverId(), DRIVER_BUSY);
+
+        // Assign driver to the ride and update ride status
+        ride.setDriverId(driver.driverId());
         ride.setStatus(RideStatus.ASSIGNED);
         ride.setUpdatedAt(LocalDateTime.now());
+        
         return rideRepository.save(ride);
     }
 
@@ -76,8 +88,8 @@ public class RideServiceImpl implements RideService {
 
         if ((nextStatus == RideStatus.COMPLETED || nextStatus == RideStatus.CANCELLED)
                 && ride.getDriverId() != null) {
-            driverServiceClient.updateDriverStatus(
-                    ride.getDriverId(), new DriverStatusUpdateRequest(DRIVER_AVAILABLE));
+            // Restore driver status to AVAILABLE upon completion or cancellation
+            driverServiceClient.updateAvailability(ride.getDriverId(), DRIVER_AVAILABLE);
         }
 
         ride.setStatus(nextStatus);
