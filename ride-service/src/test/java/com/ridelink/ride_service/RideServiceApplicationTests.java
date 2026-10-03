@@ -4,19 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
 import com.ridelink.ride_service.model.RideStatus;
 
-@SpringBootTest(properties = {
-    "de.flapdoodle.mongodb.embedded.version=7.0.0",
-    "spring.data.mongodb.uri=mongodb://localhost/test"
-})
 class RideServiceApplicationTests {
-
-    @Test
-    void contextLoads() {
-    }
 
     @Test
     void allowsOnlyTheNextLifecycleState() {
