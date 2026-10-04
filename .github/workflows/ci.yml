@@ -1,6 +1,5 @@
 name: RideLink Microservices CI
 
-# main සහ develop branches වලට push හෝ PR එකක් ආවම ක්‍රියාත්මක වේ
 on:
   push:
     branches: [ "main", "develop" ]
@@ -12,9 +11,9 @@ jobs:
     name: Build & Test
     runs-on: ubuntu-latest
 
-    # Services 4 වෙන වෙනම parallel run කිරීමට matrix එකක් පාවිච්චි කරයි
+    
     strategy:
-      fail-fast: false # එක service එකක් fail වුණත් අනිත් ඒවා දිගටම run වේ
+      fail-fast: false 
       matrix:
         include:
           - service: account-service
