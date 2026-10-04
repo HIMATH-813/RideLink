@@ -39,6 +39,15 @@ public class AccountPrincipal implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return isEnabled();
+        return true;
+    }
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 }

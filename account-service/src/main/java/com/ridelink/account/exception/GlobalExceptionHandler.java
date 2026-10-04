@@ -71,6 +71,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiErrorResponse> handleUnexpected(Exception exception, WebRequest request) {
+        exception.printStackTrace();
         return createResponse(HttpStatus.INTERNAL_SERVER_ERROR, "An unexpected error occurred", request, Map.of());
     }
 

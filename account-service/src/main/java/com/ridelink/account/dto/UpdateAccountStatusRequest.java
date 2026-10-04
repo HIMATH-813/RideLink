@@ -5,4 +5,8 @@ import com.ridelink.account.entity.AccountStatus;
 import jakarta.validation.constraints.NotNull;
 
 public record UpdateAccountStatusRequest(@NotNull AccountStatus status) {
+
+	public AccountStatus getStatus() {
+		return status;
+	}
 }

@@ -3,6 +3,7 @@ package com.ridelink.account;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,10 @@ import com.ridelink.account.entity.AccountRole;
 import com.ridelink.account.entity.AccountStatus;
 import com.ridelink.account.security.AccountPrincipal;
 import com.ridelink.account.security.JwtTokenService;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 
 class AccountSecurityTests {
     private static final String JWT_SECRET = "test-secret-key-that-is-long-enough-for-hmac-signing";
@@ -24,6 +29,28 @@ class AccountSecurityTests {
 
         assertThat(principal.isEnabled()).isFalse();
         assertThat(principal.getAuthorities()).extracting("authority").containsExactly("ROLE_DRIVER");
+    }
+
+    @Test
+    void inactiveAccountIsDisabled() {
+        assertThat(new AccountPrincipal(createAccount(AccountStatus.INACTIVE)).isEnabled()).isFalse();
+    }
+
+    @Test
+    void adminRoleIsGrantedAndIncludedInGeneratedToken() {
+        Account account = createAccount(AccountStatus.ACTIVE, AccountRole.ADMIN);
+        AccountPrincipal principal = new AccountPrincipal(account);
+        JwtTokenService tokenService = new JwtTokenService(JWT_SECRET, 900_000);
+
+        String token = tokenService.generateToken(account);
+        Claims claims = Jwts.parser()
+                .verifyWith(Keys.hmacShaKeyFor(JWT_SECRET.getBytes(StandardCharsets.UTF_8)))
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+
+        assertThat(principal.getAuthorities()).extracting("authority").containsExactly("ROLE_ADMIN");
+        assertThat(claims.get("role", String.class)).isEqualTo("ADMIN");
     }
 
     @Test
@@ -53,8 +80,12 @@ class AccountSecurityTests {
     }
 
     private Account createAccount(AccountStatus status) {
+        return createAccount(status, AccountRole.DRIVER);
+    }
+
+    private Account createAccount(AccountStatus status, AccountRole role) {
         Instant now = Instant.now();
         return new Account("driver@example.com", "hashed-password", "RideLink Driver", null,
-                AccountRole.DRIVER, status, now, now);
+                role, status, now, now);
     }
 }

@@ -19,12 +19,37 @@ import com.ridelink.account.repository.AccountRepository;
 
 @Service
 public class AccountServiceImpl implements AccountService {
+    
     private final AccountRepository accountRepository;
     private final PasswordEncoder passwordEncoder;
 
     public AccountServiceImpl(AccountRepository accountRepository, PasswordEncoder passwordEncoder) {
         this.accountRepository = accountRepository;
         this.passwordEncoder = passwordEncoder;
+    }
+
+    @Override
+    public AccountResponse updateProfile(String email, UpdateProfileRequest request) {
+        Account account = accountRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Account not found"));
+        
+        account.setFullName(request.getFullName());
+        account.setPhoneNumber(request.getPhoneNumber());
+        account.setUpdatedAt(java.time.Instant.now());
+        
+        accountRepository.save(account);
+        return getProfile(email); 
+    }
+
+    @Override
+    public AccountResponse updateStatusByEmail(String email, UpdateAccountStatusRequest request) {
+        return saveStatus(findByEmail(email), request);
+    }
+
+    private AccountResponse saveStatus(Account account, UpdateAccountStatusRequest request) {
+        account.setStatus(request.getStatus());
+        account.setUpdatedAt(java.time.Instant.now());
+        return toResponse(accountRepository.save(account));
     }
 
     @Override
@@ -53,22 +78,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountResponse updateProfile(String email, UpdateProfileRequest request) {
-        Account account = findByEmail(email);
-        account.setFullName(request.fullName().trim());
-        if (request.phoneNumber() != null) {
-            account.setPhoneNumber(normalizePhoneNumber(request.phoneNumber()));
-        }
-        account.setUpdatedAt(Instant.now());
-        return toResponse(accountRepository.save(account));
-    }
-
-    @Override
-    public AccountResponse updateStatus(String accountId, UpdateAccountStatusRequest request) {
-        Account account = accountRepository.findById(accountId).orElseThrow(AccountNotFoundException::new);
-        account.setStatus(request.status());
-        account.setUpdatedAt(Instant.now());
-        return toResponse(accountRepository.save(account));
+    public AccountResponse getProfileById(String accountId) {
+        Account account = accountRepository.findById(accountId)
+                .orElseThrow(() -> new RuntimeException("Account not found with ID: " + accountId));
+          
+        return toResponse(account); // දැනටමත් තියෙන toResponse method එක පාවිච්චි කළා
     }
 
     private Account findByEmail(String email) {
