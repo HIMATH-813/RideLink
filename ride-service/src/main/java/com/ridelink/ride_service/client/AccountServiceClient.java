@@ -32,6 +32,6 @@ public class AccountServiceClient {
         return response.getBody().id();
     }
 
-    // Long වෙනුවට String ලෙස වෙනස් කර ඇත
+    // The ID is represented as a String rather than a Long.
     public record AccountMeResponse(String id) {}
 }

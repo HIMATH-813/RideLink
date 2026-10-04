@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader; // අලුතින් import කරන්න
+import org.springframework.web.bind.annotation.RequestHeader; // Add this import.
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -21,7 +21,7 @@ import com.ridelink.ride_service.model.Ride;
 import com.ridelink.ride_service.service.RideService;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement; // අලුතින් import කරන්න
+import io.swagger.v3.oas.annotations.security.SecurityRequirement; // Add this import.
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -37,10 +37,10 @@ public class RideController {
 
     @PostMapping
     @Operation(summary = "Create a ride request")
-    @SecurityRequirement(name = "Bearer Authentication") // Swagger එකට Token එක ඉල්ලීමට කියයි
+    @SecurityRequirement(name = "Bearer Authentication") // Tell Swagger to request a token.
     public ResponseEntity<Ride> createRide(
             @Valid @RequestBody CreateRideRequest request,
-            @RequestHeader("Authorization") String authorizationHeader) { // HttpServletRequest වෙනුවට මෙය යොදන්න
+            @RequestHeader("Authorization") String authorizationHeader) { // Use this instead of HttpServletRequest.
         
         String passengerId = accountServiceClient.getCurrentUserId(authorizationHeader);
 
