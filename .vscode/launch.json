@@ -12,4 +12,25 @@
             }
         }
     ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Ride Service",
+      "request": "launch",
+      "mainClass": "com.ridelink.ride_service.RideServiceApplication",
+      "projectName": "ride-service",
+      "cwd": "${workspaceFolder}/ride-service",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+       "type": "java",
+      "name": "Driver Service",
+      "request": "launch",
+      "mainClass": "com.ridelink.driverservice.DriverServiceApplication",
+      "projectName": "driver-service",
+      "cwd": "${workspaceFolder}/driver-service",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
 }

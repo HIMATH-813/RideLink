@@ -9,7 +9,6 @@ import com.ridelink.account.entity.AccountStatus;
 import com.ridelink.account.repository.AccountRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -27,7 +26,8 @@ public class AccountServiceApplication {
                 .components(new Components().addSecuritySchemes(schemeName,
                         new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")));
     }
-	@Bean
+
+    @Bean
     CommandLineRunner initAdmin(AccountRepository accountRepository, PasswordEncoder passwordEncoder) {
         return args -> {
             String adminEmail = "admin@ridelink.com";

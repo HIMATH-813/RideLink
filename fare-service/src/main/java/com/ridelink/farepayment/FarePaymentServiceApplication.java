@@ -1,13 +1,13 @@
-package com.ridelink.driver_service;
+package com.ridelink.farepayment;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DriverServiceApplication {
+public class FarePaymentServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DriverServiceApplication.class, args);
+		SpringApplication.run(FarePaymentServiceApplication.class, args);
 	}
 
 }

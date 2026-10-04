@@ -37,11 +37,12 @@ public class AccountController {
             @Valid @RequestBody UpdateProfileRequest request) {
         return accountService.updateProfile(userDetails.getUsername(), request);
     }
-@GetMapping("/user/{email}")
+
+    @GetMapping("/user/{email}")
     public AccountResponse getUserDetailsByEmail(@PathVariable String email) {
         return accountService.getProfile(email);
     }
-   
+    
     @GetMapping("/{accountId}")
     public AccountResponse getUserDetailsById(@PathVariable String accountId) {
         return accountService.getProfileById(accountId);
