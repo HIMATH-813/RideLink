@@ -1,4 +1,17 @@
 {
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "AccountServiceApplication",
+            "request": "launch",
+            "mainClass": "com.ridelink.account.AccountServiceApplication",
+            "projectName": "account-service",
+            "env": {
+                "MONGO_URI": "mongodb+srv://admin:Fami123Kali@cluster0.97z98fd.mongodb.net/ridelink_accounts?appName=Cluster0"
+            }
+        }
+    ]
   "version": "0.2.0",
   "configurations": [
     {

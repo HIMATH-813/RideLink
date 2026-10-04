@@ -7,4 +7,12 @@ import jakarta.validation.constraints.Size;
 public record UpdateProfileRequest(
         @NotBlank @Size(max = 100) String fullName,
         @Pattern(regexp = "^$|\\+?[0-9 .()\\-]{7,20}", message = "must be a valid phone number") String phoneNumber) {
+
+        public String getFullName() {
+                return fullName;
+        }
+
+        public String getPhoneNumber() {
+                return phoneNumber;
+        }
 }
