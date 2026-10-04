@@ -1,0 +1,205 @@
+{
+  "info": {
+    "_postman_id": "ef939ae3-7cbf-44e0-9c63-2b777bc40e6e",
+    "name": "RideLink - Account Service",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "58712351",
+    "_collection_link": "https://go.postman.co/collection/58712351-ef939ae3-7cbf-44e0-9c63-2b777bc40e6e?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "1. Register User",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8081/api/v1/auth/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "v1",
+            "auth",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "2. Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\": \"driver_kamal@example.com\",\r\n  \"password\": \"password123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/v1/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "v1",
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "3. Get My Profile",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8081/api/v1/accounts/me",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "v1",
+            "accounts",
+            "me"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "4. Update My Profile",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8081/api/v1/accounts/me",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "v1",
+            "accounts",
+            "me"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "5. Get User By Email",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8081/api/v1/accounts/user/{email}",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "v1",
+            "accounts",
+            "user",
+            "{email}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "6. Get User By ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8081/api/v1/accounts/{ID}",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "v1",
+            "accounts",
+            "{ID}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "7. Admin Update Status",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8081/api/v1/admin/accounts/{email}/status",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "v1",
+            "admin",
+            "accounts",
+            "{email}",
+            "status"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkcml2ZXJfa2FtYWxAZXhhbXBsZS5jb20iLCJyb2xlIjoiRFJJVkVSIiwiaWF0IjoxNzkxMTA4MDI4LCJleHAiOjE3OTExMDg5Mjh9.9zDbtkDkO3e2ovlfqYKs_BllFYqwU7qWKfiIIopjffNC3reogZHXkDJvAS5-XOq6S2b8sDSwLDftUo5XucXhRg",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "json_web_token_0w65",
+      "secret": true
+    },
+    {
+      "key": "json_web_token_0wou",
+      "secret": true
+    },
+    {
+      "key": "json_web_token_0ne0",
+      "secret": true
+    },
+    {
+      "key": "json_web_token_05b4",
+      "secret": true
+    }
+  ]
+}
