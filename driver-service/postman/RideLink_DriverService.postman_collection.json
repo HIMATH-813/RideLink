@@ -1,0 +1,503 @@
+{
+  "info": {
+    "_postman_id": "6cbdfdf8-cc9f-4a07-8dc6-879703d3cdc2",
+    "name": "RideLink - Driver Service",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "57694417",
+    "_collection_link": "https://go.postman.co/collection/57694417-6cbdfdf8-cc9f-4a07-8dc6-879703d3cdc2?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "1. Create Drivers",
+      "item": [
+        {
+          "name": "Create Driver 1 - Colombo AVAILABLE",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200 or 201\", function () {\r\n    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r\n});\r\n\r\npm.test(\"driverId generated\", function () {\r\n    const body = pm.response.json();\r\n    pm.expect(body.success).to.eql(true);\r\n    pm.expect(body.data.driverId).to.be.a(\"string\");\r\n    pm.environment.set(\"driverId\", body.data.driverId);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": \"user-001\",\r\n  \"serviceArea\": \"Colombo\",\r\n  \"vehicleDetails\": {\r\n    \"model\": \"Toyota Prius\",\r\n    \"registrationNumber\": \"CAB-1234\",\r\n    \"vehicleType\": \"CAR\",\r\n    \"color\": \"White\",\r\n    \"capacity\": 4\r\n  },\r\n  \"availabilityStatus\": \"AVAILABLE\",\r\n  \"location\": {\r\n    \"latitude\": 6.9271,\r\n    \"longitude\": 79.8612\r\n  },\r\n  \"rating\": 4.5\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/drivers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Driver 2 - Colombo AVAILABLE",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200 or 201\", function () {\r\n    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r\n});\r\n\r\npm.test(\"driverId generated\", function () {\r\n    const body = pm.response.json();\r\n    pm.expect(body.success).to.eql(true);\r\n    pm.expect(body.data.driverId).to.be.a(\"string\");\r\n    pm.environment.set(\"driverId\", body.data.driverId);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": \"user-012\",\r\n  \"serviceArea\": \"Colombo\",\r\n  \"vehicleDetails\": {\r\n    \"model\": \"Suzuki Alto\",\r\n    \"registrationNumber\": \"CAB-5600\",\r\n    \"vehicleType\": \"CAR\",\r\n    \"color\": \"Silver\",\r\n    \"capacity\": 4\r\n  },\r\n  \"availabilityStatus\": \"AVAILABLE\",\r\n  \"location\": {\r\n    \"latitude\": 6.9147,\r\n    \"longitude\": 79.8730\r\n  },\r\n  \"rating\": 4.2\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/drivers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Driver 3 - Colombo UNAVAILABLE",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200 or 201\", function () {\r\n    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r\n});\r\n\r\npm.test(\"driverId generated\", function () {\r\n    const body = pm.response.json();\r\n    pm.expect(body.success).to.eql(true);\r\n    pm.expect(body.data.driverId).to.be.a(\"string\");\r\n    pm.environment.set(\"driverId\", body.data.driverId);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": \"user-003\",\r\n  \"serviceArea\": \"Colombo\",\r\n  \"vehicleDetails\": {\r\n    \"model\": \"Bajaj RE\",\r\n    \"registrationNumber\": \"TUK-9999\",\r\n    \"vehicleType\": \"TUKTUK\",\r\n    \"color\": \"Yellow\",\r\n    \"capacity\": 3\r\n  },\r\n  \"availabilityStatus\": \"UNAVAILABLE\",\r\n  \"location\": {\r\n    \"latitude\": 6.9344,\r\n    \"longitude\": 79.8428\r\n  },\r\n  \"rating\": 4.0\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/drivers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Driver 4 - Colombo IN_RIDE",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200 or 201\", function () {\r\n    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r\n});\r\n\r\npm.test(\"driverId generated\", function () {\r\n    const body = pm.response.json();\r\n    pm.expect(body.success).to.eql(true);\r\n    pm.expect(body.data.driverId).to.be.a(\"string\");\r\n    pm.environment.set(\"driverId\", body.data.driverId);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": \"user-004\",\r\n  \"serviceArea\": \"Colombo\",\r\n  \"vehicleDetails\": {\r\n    \"model\": \"Toyota Hiace\",\r\n    \"registrationNumber\": \"VAN-4444\",\r\n    \"vehicleType\": \"VAN\",\r\n    \"color\": \"Blue\",\r\n    \"capacity\": 8\r\n  },\r\n  \"availabilityStatus\": \"IN_RIDE\",\r\n  \"location\": {\r\n    \"latitude\": 6.8900,\r\n    \"longitude\": 79.8600\r\n  },\r\n  \"rating\": 4.8\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/drivers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Driver 5 - Kandy AVAILABLE",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200 or 201\", function () {\r\n    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r\n});\r\n\r\npm.test(\"driverId generated\", function () {\r\n    const body = pm.response.json();\r\n    pm.expect(body.success).to.eql(true);\r\n    pm.expect(body.data.driverId).to.be.a(\"string\");\r\n    pm.environment.set(\"driverId\", body.data.driverId);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": \"user-005\",\r\n  \"serviceArea\": \"Kandy\",\r\n  \"vehicleDetails\": {\r\n    \"model\": \"Honda Vezel\",\r\n    \"registrationNumber\": \"KAN-1111\",\r\n    \"vehicleType\": \"CAR\",\r\n    \"color\": \"Black\",\r\n    \"capacity\": 4\r\n  },\r\n  \"availabilityStatus\": \"AVAILABLE\",\r\n  \"location\": {\r\n    \"latitude\": 7.2906,\r\n    \"longitude\": 80.6337\r\n  },\r\n  \"rating\": 4.6\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/drivers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "2. Get Driver",
+      "item": [
+        {
+          "name": "Get Driver by ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Returns the same driver\", function () {\r\n    const body = pm.response.json();\r\n    pm.expect(body.data.driverId).to.eql(pm.environment.get(\"driverId\"));\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/drivers/{{driverId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers",
+                "{{driverId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "3. Eligible Drivers",
+      "item": [
+        {
+          "name": "Eligible - Colombo",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Only AVAILABLE drivers in Colombo\", function () {\r\n    const drivers = pm.response.json().data;\r\n    pm.expect(drivers.length).to.be.above(0);\r\n    drivers.forEach(function (d) {\r\n        pm.expect(d.availabilityStatus).to.eql(\"AVAILABLE\");\r\n        pm.expect(d.serviceArea).to.eql(\"Colombo\");\r\n    });\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/drivers/eligible?serviceArea=Colombo",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers",
+                "eligible"
+              ],
+              "query": [
+                {
+                  "key": "serviceArea",
+                  "value": "Colombo"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Eligible - Kandy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Only AVAILABLE drivers in Colombo\", function () {\r\n    const drivers = pm.response.json().data;\r\n    pm.expect(drivers.length).to.be.above(0);\r\n    drivers.forEach(function (d) {\r\n        pm.expect(d.availabilityStatus).to.eql(\"AVAILABLE\");\r\n        pm.expect(d.serviceArea).to.eql(\"Colombo\");\r\n    });\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/drivers/eligible?serviceArea=Kandy",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers",
+                "eligible"
+              ],
+              "query": [
+                {
+                  "key": "serviceArea",
+                  "value": "Kandy"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Eligible - Jaffna",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Empty list for unknown area\", function () {\r\n    pm.response.to.have.status(200);\r\n    pm.expect(pm.response.json().data).to.be.an(\"array\").that.is.empty;\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/drivers/eligible?serviceArea=Jaffna",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers",
+                "eligible"
+              ],
+              "query": [
+                {
+                  "key": "serviceArea",
+                  "value": "Jaffna"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "4. Negative Tests",
+      "item": [
+        {
+          "name": "Negative - Driver not found",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404 Not Found\", function () {\r\n    pm.response.to.have.status(404);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/drivers/abc123",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers",
+                "abc123"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Negative - Missing serviceArea",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200 or 201\", function () {\r\n    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r\n});\r\n\r\npm.test(\"driverId generated\", function () {\r\n    const body = pm.response.json();\r\n    pm.expect(body.success).to.eql(true);\r\n    pm.expect(body.data.driverId).to.be.a(\"string\");\r\n    pm.environment.set(\"driverId\", body.data.driverId);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": \"user-902\",\r\n  \"vehicleDetails\": {\r\n    \"model\": \"Test Car\",\r\n    \"registrationNumber\": \"NEG-0002\",\r\n    \"vehicleType\": \"CAR\",\r\n    \"color\": \"Red\",\r\n    \"capacity\": 4\r\n  },\r\n  \"availabilityStatus\": \"AVAILABLE\",\r\n  \"location\": {\r\n    \"latitude\": 6.9271,\r\n    \"longitude\": 79.8612\r\n  },\r\n  \"rating\": 4.0\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/drivers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Negative - Invalid enum",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400 Bad Request\", function () {\r\n    pm.response.to.have.status(400);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": \"user-901\",\r\n  \"serviceArea\": \"Colombo\",\r\n  \"vehicleDetails\": {\r\n    \"model\": \"Test Car\",\r\n    \"registrationNumber\": \"NEG-0001\",\r\n    \"vehicleType\": \"CAR\",\r\n    \"color\": \"Red\",\r\n    \"capacity\": 4\r\n  },\r\n  \"availabilityStatus\": \"ONLINE\",\r\n  \"location\": {\r\n    \"latitude\": 6.9271,\r\n    \"longitude\": 79.8612\r\n  },\r\n  \"rating\": 4.0\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/drivers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Negative - Invalid latitude",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400 Bad Request\", function () {\r\n    pm.response.to.have.status(400);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": \"user-903\",\r\n  \"serviceArea\": \"Colombo\",\r\n  \"vehicleDetails\": {\r\n    \"model\": \"Test Car\",\r\n    \"registrationNumber\": \"NEG-0003\",\r\n    \"vehicleType\": \"CAR\",\r\n    \"color\": \"Red\",\r\n    \"capacity\": 4\r\n  },\r\n  \"availabilityStatus\": \"AVAILABLE\",\r\n  \"location\": {\r\n    \"latitude\": 999,\r\n    \"longitude\": 79.8612\r\n  },\r\n  \"rating\": 4.0\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/drivers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
