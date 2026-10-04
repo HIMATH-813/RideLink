@@ -10,7 +10,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 public class RideServiceApplication {
 
     public static void main(String[] args) {
-        // .env file එක load කරගැනීම (system env වලටත් priority දීම සඳහා)
+        // .env file loading and setting environment variables
         Dotenv dotenv = Dotenv.configure()
                 .ignoreIfMissing()
                 .load();
@@ -25,7 +25,7 @@ public class RideServiceApplication {
             if (!"MONGODB_URI".equals(entry.getKey())) {
                 System.setProperty(entry.getKey(), entry.getValue());
             }
-            // Debug කිරීම සඳහා prints ටිකක් (අවශ්‍ය නම් තබාගන්න)
+            // Debuging and logging the loaded environment variables
             // System.out.println("Loaded ENV -> " + entry.getKey() + ": " + entry.getValue());
         });
 
