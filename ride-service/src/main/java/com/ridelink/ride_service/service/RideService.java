@@ -5,8 +5,7 @@ import com.ridelink.ride_service.model.Ride;
 import com.ridelink.ride_service.model.RideStatus;
 
 public interface RideService {
-    Ride createRide(CreateRideRequest request);
-
+Ride createRide(CreateRideRequest request, String passengerId);
     Ride assignDriver(String rideId);
 
     Ride updateRideStatus(String rideId, RideStatus nextStatus);

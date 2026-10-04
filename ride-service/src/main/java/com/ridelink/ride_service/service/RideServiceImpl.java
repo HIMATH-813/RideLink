@@ -29,10 +29,10 @@ public class RideServiceImpl implements RideService {
     private final DriverServiceClient driverServiceClient;
 
     @Override
-    public Ride createRide(CreateRideRequest request) {
+    public Ride createRide(CreateRideRequest request, String passengerId) {
         LocalDateTime now = LocalDateTime.now();
         Ride ride = Ride.builder()
-                .passengerId(request.passengerId())
+                .passengerId(passengerId)
                 .pickupLocation(request.pickupLocation())
                 .destination(request.destination())
                 .estimatedFare(request.estimatedFare())

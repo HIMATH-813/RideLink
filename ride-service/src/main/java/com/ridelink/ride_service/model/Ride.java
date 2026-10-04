@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class Ride {
     @Id
     private String id;
-    private Long passengerId;
+    private String passengerId;
     private String driverId;
     private String pickupLocation;
     private String destination;
